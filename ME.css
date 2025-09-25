@@ -1,0 +1,145 @@
+/* Estilos generales */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('Imagen_fondo.jpg'); /* Cambia 'ruta/a/tu/imagen.jpg' por la ruta real de tu imagen */
+    background-size: cover; /* Cubre completamente el área del fondo */
+    background-position: center; /* Centra la imagen en la página */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    color: #333;
+}
+
+h1 {
+    color: #0056b3;  /* Un azul más profesional para un servicio médico */
+    text-align: center;
+    padding: 30px 0;
+    font-weight: normal;
+}
+
+/* Aumento de legibilidad y tamaño en textos generales, especialmente en secciones informativas */
+.card-font {
+    font-size: 1.2em;
+    color: #333;
+    line-height: 1.5;
+}
+
+/* Alineación y distribución en el centro para vistas como el login o landing page */
+.center-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Estilos para secciones del formulario */
+.seccion {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1);
+    border-radius: 8px; /* Bordes redondeados para una apariencia más suave */
+    display: none;
+}
+
+.activa {
+    display: block;
+}
+
+/* Margen uniforme para grupos de formulario */
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* Botones con un diseño más profesional */
+.btn {
+    background-color: #80ccdf; /* Verde salud */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #26b7eb; /* Un tono más oscuro al pasar el mouse */
+}
+
+/* Estilos de entrada de formulario para mejor accesibilidad */
+.form-style {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Alineación de botones en el formulario */
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+/* Estilo básico para el enlace */
+a.dynamic-link {
+    color: #007BFF; /* Color azul para los enlaces normales */
+    text-decoration: none; /* Elimina el subrayado por defecto */
+}
+
+/* Estilo para cuando el ratón pasa sobre el enlace */
+a.dynamic-link:hover {
+    color: #0056b3; /* Un azul más oscuro para el estado hover */
+    text-decoration: underline; /* Añade un subrayado al pasar el ratón */
+}
+
+/* Estilo para cuando el enlace ha sido clickeado */
+a.dynamic-link:active {
+    color: #003875; /* Un azul más oscuro para el estado active */
+}
+
+/* Estilo para enlaces visitados */
+a.dynamic-link:visited {
+    color: #8855a3; /* Púrpura para indicar que el enlace ha sido visitado */
+}
+
+/* Estilo para cuando el enlace está enfocado */
+a.dynamic-link:focus {
+    outline: none; /* Elimina el contorno por defecto */
+    box-shadow: 0 0 2px 2px #0056b3; /* Añade un sombreado para mejorar la visibilidad del foco */
+}
+
+
+/* Media queries para adaptabilidad */
+@media (max-width: 768px) {
+    .center-wrap {
+        height: auto;
+        padding: 20px;
+    }
+
+    .seccion {
+        max-width: 100%;
+        box-shadow: none;
+        padding: 15px;
+    }
+
+    .btn {
+        width: 100%; /* Botones más grandes en dispositivos móviles */
+    }
+}
+header {
+    background-color: #d6eff5;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 24px;
+    color: black;
+    border-bottom: 1px solid #ccc;
+}
+#saludo {
+    display: inline-block;
+    margin-right: 20px; /* Ajusta este valor a tu gusto */
+    font-size: 20px; /* Ajusta este valor a tu gusto */
+    color: black;
+}

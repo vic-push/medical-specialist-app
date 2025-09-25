@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> MEDICO ESPECIALISTA </title>
+    <link href="ME.css" rel="stylesheet" type="text/css"/>
+    <script src="rest.js"></script> 
+    <script src="rpc.js"></script>
+    <script src="ME.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Aplicación ME</h1>
+    </header>
+    <h1>Servicio Médico Especialista</h1>
+    <br>
+
+    <!--?----------------- LOGIN ESPECIALISTA ---------------------------->
+    <div id="login" class="seccion activa">
+        <h2>Bienvenido a la aplicación web</h2>
+        <br/>
+        <fieldset>
+            <legend>
+                Login
+                <i class="iconoMensajes"></i>
+            </legend>
+            <br/>
+            <br/>
+            <input type="text" name="usuario" class="form-style" placeholder="Usuario" id="usuario"/>
+            <br/>
+            <br/>
+            <input type="password" name="contraseña" class="form-style" placeholder="Contraseña" id="contraseña" />
+            <br/>
+            <br/>
+            <button class="btn" onclick="Acceder()">Acceder</button>
+            <button class="btn" onclick="cambiarSeccion('registro')">Registrarse</button>
+        </fieldset>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <fieldset>
+            <legend>
+                Acceso rápido a la aplicación Medico de atención primaria
+            </legend>
+            <button class = "btn" id = "prueba"onclick="location.href='http://localhost:3000/map/'" >Ir a app médico atención primaria</button>
+        </fieldset>
+    </div>
+    <!--?----------------- REGISTRAR ESPECIALISTA ---------------------------->
+    <div id="registro" class="seccion">
+        <fieldset>
+            <legend>Datos del nuevo registro </legend>
+            <br/>
+            <br/>
+            <input type="text" name="nombre" class="form-style" placeholder="Nombre(s)" id="nombre"/>
+            <br/>
+            <br/>
+            <input type="text" name="apellido" class="form-style" placeholder="Apellido(s)" id="apellido"/>
+            <br/>
+            <br/>
+            <input type="text" name="n_usuario" class="form-style" placeholder="Usuario" id="n_usuario"/>
+            <br/>
+            <br/>
+            <input type="password" name="password" class="form-style" placeholder="Contraseña" id="password" />
+            <br/>
+            <br/>
+            <div>
+                <select id="centros" name="centros" required>
+                    <option disabled selected>Centro adscrito</option>
+                    <option value="1">Hospital General Universitario de Alicante</option>
+                    <option value="2">Hospital Universitari Sant Joan d'Alacant</option>
+                    <option value="3">Hospital Vithas Alicante</option>
+                    <option value="4">Neuroklinik</option>
+                    <option value="5">Clínica HLA Vistahermosa</option>
+                </select>
+            </div>
+            <br/>
+            <br/>
+            <div>
+                <select id="especialidad" name="especialidad">
+                    <option disabled selected>Especialidad</option>
+                    <option value="1">Cardiología</option>
+                    <option value="2">Dermatología</option>
+                    <option value="3">Alergología</option>
+                    <option value="4">Reumatología</option>
+                    <option value="5">Psiquiatría</option>
+                    <option value="6">Obstetricía y Ginecología</option>
+                    <option value="7">Geriatría</option>
+                    <option value="8">Inmunología</option>
+                    <option value="9">Neurología</option>
+                    <option value="10">Urología</option>
+                </select>
+            </div>
+            <br/>
+            <br/>
+            <button class= "btn" onclick = "nuevoME()">Enviar</button>
+            <button class="btn" onclick = "cambiarSeccion('login')">volver</button>
+        </fieldset>
+    </div>
+
+    <!--?----------------- MENÚ PRINCIPAL ---------------------------->
+    <div id="menu_principal" class="seccion">
+            <h2>MENÚ PRINCIPAL</h2>
+        <br/>
+        <br/>
+        <p id = "saludo"></p> <button class="btn" onclick = "datosUsuario()"> Editar datos </button>
+        <br/>
+        <br/>
+        <br/>
+        <button class = "btn" onclick = "asignar_expediente()"> Asignar expediente </button> <button class = "btn" onclick = "expedientes_asignados()"> Expedientes asignados </button>
+        <br/>
+        <br/>
+        <br/>
+        <button class="btn" onclick = "cambiarSeccion('login')">Salir</button>
+    </div>
+
+    <!--?----------------- MODIFICAR DATOS MÉDICO ---------------------------->  
+    <div id="editar_especialista" class="seccion">
+        <fieldset>
+            <legend> Datos médico </legend>
+            <br/>
+            <br/>
+            <input type="text" name="editar_nombre_registro" class="form-style" placeholder="Nombre(s)" id="editar_nombre_registro"/>
+            <br/>
+            <br/>
+            <input type="text" name="editar_apellido_registro" class="form-style" placeholder="Apellido(s)" id="editar_apellido_registro"/>
+            <br/>
+            <br/>
+            <input type="text" name="editar_usuario_registro" class="form-style" placeholder="Usuario" id="editar_usuario_registro"/>
+            <br/>
+            <br/>
+            <input type="password" name="editar_password_registro" class="form-style" placeholder="Contraseña" id="editar_password_registro" />
+            <br/>
+            <br/>
+            <div>
+                <select id="editar_centros_registro" name="editar_centros_registro">
+                    <option value="1">Hospital General Universitario de Alicante</option>
+                    <option value="2">Hospital Universitari Sant Joan d'Alacant</option>
+                    <option value="3">Hospital Vithas Alicante</option>
+                    <option value="4">Neuroklinik</option>
+                    <option value="5">Clínica HLA Vistahermosa</option>
+                </select>
+            </div>
+            <br/>
+            <br/>
+            <div>
+                <select id="editar_especialidades" name="editar_especialidades">
+                    <option value="1">Cardiología</option>
+                    <option value="2">Dermatología</option>
+                    <option value="3">Alergología</option>
+                    <option value="4">Reumatología</option>
+                    <option value="5">Psiquiatría</option>
+                    <option value="6">Obstetricía y Ginecología</option>
+                    <option value="7">Geriatría</option>
+                    <option value="8">Inmunología</option>
+                    <option value="9">Neurología</option>
+                    <option value="10">Urología</option>
+                </select>
+            </div>
+            <br/>
+            <br/>
+            <button class= "btn" onclick = "editarME()">Enviar</button>
+            <button class="btn" onclick = "cambiarSeccion('menu_principal')">volver</button>
+        </fieldset>
+    </div>
+
+    <!--?----------------- ASIGNAR EXPEDIENTES ---------------------------->    
+    <div id = "asignar_expedientes" class = "seccion">
+        <h2>Aplicación ME</h2>
+    <fieldset>
+        <legend>
+        Expedientes sin asignar
+        </legend>
+        <br/>
+        <br/>
+        <dl id = "expedientes"></dl>
+        <br/>
+        <br/>
+        <button class="btn" onclick = "cambiarSeccion('menu_principal')"> Volver al inicio </button>
+    </fieldset>
+    </div>
+
+    <!--?----------------- EXPEDIENTES ---------------------------->  
+    <div id = "form_expedientes_asignados" class = "seccion">
+        <h2>Aplicación ME</h2>
+    <fieldset>
+        <legend>
+        Expedientes asignados
+        </legend>
+        <br/>
+        <br/>
+        <dl id = "formlist_expedientes_asignados"></dl>
+        <br/>
+        <br/>
+        <button class="btn" onclick = "volver_listado()"> Volver al listado </button>
+    </fieldset>
+    </div>
+
+    <!--?----------------- DATOS EXPEDIENTE ---------------------------->  
+    <div id="form_expediente" class="seccion">
+        <fieldset>
+            <legend>Expediente </legend>
+            <br/>
+            <br/>
+            <div><label><span class="required">ID: </span></label>
+            <input type="text" name="id_expediente" class="form-style" id="id_expediente" disabled/>
+            <br/>
+            <br/>
+            <div><label><span class="required">Med. Esp: </span></label>
+            <input type="text" name="ME_expediente" class="form-style" id="ME_expediente" disabled/>
+            <br/>
+            <br/>
+            <div><label><span class="required">Especialidad: </span></label>
+                <select id="especialidades_expediente" name="especialidades_expediente" disabled>
+                    <option disabled selected></option>
+                    <option value="1">Cardiología</option>
+                    <option value="2">Dermatología</option>
+                    <option value="3">Alergología</option>
+                    <option value="4">Reumatología</option>
+                    <option value="5">Psiquiatría</option>
+                    <option value="6">Obstetricía y Ginecología</option>
+                    <option value="7">Geriatría</option>
+                    <option value="8">Inmunología</option>
+                    <option value="9">Neurología</option>
+                    <option value="10">Urología</option>
+                </select>
+            </div>
+            <br/>
+            <div><label><span class="required">SIP: </span></label>
+            <input type="text" name="sip_expediente" class="form-style" placeholder="SIP" id="sip_expediente" disabled/>
+            <br/>
+            <br/>
+            <div><label><span class="required">Nombre: </span></label>
+            <input type="text" name="nombre_expediente" class="form-style" placeholder="Nombre(s)" id="nombre_expediente" disabled/>
+            <br/>
+            <br/>
+            <div><label><span class="required">Apellido: </span></label>
+            <input type="text" name="apellido_expediente" class="form-style" placeholder="Apellido(s)" id="apellido_expediente" disabled/>
+            <br/>
+            <br/>
+            <div><label><span class="required">F. Nacimiento: </span></label>
+            <input type="date" name="fecha_nacimiento_expediente" class="form-style" id="fecha_nacimiento_expediente" disabled/>
+            <br/>
+            <br/>
+            <div><label><span class="required">Genero: </span></label>
+                <select id="genero_expediente" name="genero_expediente" disabled>
+                    <option disabled selected>Género</option>
+                    <option value="Hombre">Hombre</option>
+                    <option value="Mujer">Mujer</option>
+                </select>
+            <div>
+            <br/>
+            <div><label><span class="required">Observaciones: </span></label>
+            <textarea name="observaciones_expediente" cols="20" rows="3" placeholder="Observaciones" class="form-style" id="observaciones_expediente" disabled></textarea>
+            <br/>
+            <br/>
+            <div><label><span class="required">Solicitud: </span></label>
+            <textarea name="solicitud_expediente" cols="20" rows="3" placeholder="Solicitud" class="form-style" id="solicitud_expediente" disabled></textarea>
+            <br/>
+            <br/>
+            <div><label>Respuesta: </label>
+            <textarea name="respuesta_expediente" cols="20" rows="3" class="form-style" id="respuesta_expediente" ></textarea>
+            <br/>
+            <br/>
+            <div><label>F. Solicitud: </label>
+            <input type="datetime" name="fecha_solicitud_expediente" class="form-style" id="fecha_solicitud_expediente" disabled/>
+            <br/>
+            <br/>
+            <div><label>F. Asignación: </label>
+            <input type="datetime" name="fecha_asignacion_expediente" class="form-style" id="fecha_asignacion_expediente" disabled/>
+            <br/>
+            <br/>
+            <div><label>F. Resolución: </label>
+            <input type="datetime" name="fecha_resolucion_expediente" class="form-style" id="fecha_resolucion_expediente" disabled/>
+            <br/>
+            <br/>
+            <button class= "btn" onclick = "resolucion_exp()"> Resolver expediente </button>
+            <button class="btn" onclick = "volver_listado()"> Volver al listado </button>
+        </fieldset>
+    </div>
+    <!--?----------------- DATOS EXPEDIENTE ASIGNADOS ---------------------------->  
+    <div id="form_expediente_asignado" class="seccion">
+        <fieldset>
+            <legend>Expediente </legend>
+            <br/>
+            <br/>
+            <div><label><span class="required">ID: </span></label>
+            <input type="text" name="id_expediente" class="form-style" id="id_expediente_a" disabled/>
+            <br/>
+            <br/>
+            <div><label><span class="required">Med. Esp: </span></label>
+            <input type="text" name="ME_expediente" class="form-style" id="ME_expediente_a" disabled/>
+            <br/>
+            <br/>
+            <div><label><span class="required">Especialidad: </span></label>
+                <select id="especialidades_expediente_a" name="especialidades_expediente" disabled>
+                    <option disabled selected></option>
+                    <option value="1">Cardiología</option>
+                    <option value="2">Dermatología</option>
+                    <option value="3">Alergología</option>
+                    <option value="4">Reumatología</option>
+                    <option value="5">Psiquiatría</option>
+                    <option value="6">Obstetricía y Ginecología</option>
+                    <option value="7">Geriatría</option>
+                    <option value="8">Inmunología</option>
+                    <option value="9">Neurología</option>
+                    <option value="10">Urología</option>
+                </select>
+            </div>
+            <br/>
+            <div><label><span class="required">SIP: </span></label>
+            <input type="text" name="sip_expediente" class="form-style" placeholder="SIP" id="sip_expediente_a" disabled/>
+            <br/>
+            <br/>
+            <div><label><span class="required">Nombre: </span></label>
+            <input type="text" name="nombre_expediente" class="form-style" placeholder="Nombre(s)" id="nombre_expediente_a" disabled/>
+            <br/>
+            <br/>
+            <div><label><span class="required">Apellido: </span></label>
+            <input type="text" name="apellido_expediente" class="form-style" placeholder="Apellido(s)" id="apellido_expediente_a" disabled/>
+            <br/>
+            <br/>
+            <div><label><span class="required">F. Nacimiento: </span></label>
+            <input type="date" name="fecha_nacimiento_expediente" class="form-style" id="fecha_nacimiento_expediente_a" disabled/>
+            <br/>
+            <br/>
+            <div><label><span class="required">Genero: </span></label>
+                <select id="genero_expediente_a" name="genero_expediente" disabled>
+                    <option disabled selected>Género</option>
+                    <option value="Hombre">Hombre</option>
+                    <option value="Mujer">Mujer</option>
+                </select>
+            <div>
+            <br/>
+            <div><label><span class="required">Observaciones: </span></label>
+            <textarea name="observaciones_expediente" cols="20" rows="3" placeholder="Observaciones" class="form-style" id="observaciones_expediente_a" disabled></textarea>
+            <br/>
+            <br/>
+            <div><label><span class="required">Solicitud: </span></label>
+            <textarea name="solicitud_expediente" cols="20" rows="3" placeholder="Solicitud" class="form-style" id="solicitud_expediente_a" disabled></textarea>
+            <br/>
+            <br/>
+            <div><label>Respuesta: </label>
+            <textarea name="respuesta_expediente" cols="20" rows="3" class="form-style" id="respuesta_expediente_a" ></textarea>
+            <br/>
+            <br/>
+            <div><label>F. Solicitud: </label>
+            <input type="datetime" name="fecha_solicitud_expediente" class="form-style" id="fecha_solicitud_expediente_a" disabled/>
+            <br/>
+            <br/>
+            <div><label>F. Asignación: </label>
+            <input type="datetime" name="fecha_asignacion_expediente" class="form-style" id="fecha_asignacion_expediente_a" disabled/>
+            <br/>
+            <br/>
+            <div><label>F. Resolución: </label>
+            <input type="datetime" name="fecha_resolucion_expediente" class="form-style" id="fecha_resolucion_expediente_a" disabled/>
+            <br/>
+            <br/>
+            <button class= "btn" onclick = "Resolver()"> Resolver expediente </button>
+            <button class="btn" onclick = "volver_listado()"> Volver al listado </button>
+        </fieldset>
+    </div>
+    <div id="chatRPC" class="seccion">
+    <fieldset>
+        <legend>Chat</legend>
+        <br/>
+        <ul id="mensajes_recibidos_me"></ul>
+        <div id="mensajesRPC"></div>
+        <input id="nuevoMensajeRPC" type="text">
+        <button onclick="enviarMensaje()">Enviar</button>
+    </fieldset>
+    </div>
+</body>
